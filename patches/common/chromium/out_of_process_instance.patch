@@ -5,10 +5,10 @@ Subject: out_of_process_instance.patch
 
 
 diff --git a/pdf/out_of_process_instance.cc b/pdf/out_of_process_instance.cc
-index ef12260b6a7fd996ac5601f0c3a2db6bca38a46b..12e25f4332eb421cac8797f2d1403592771547f0 100644
+index 64b4b6223995d20872f5dbd48822a4de0733aecb..a93f8566d71f5032fd1bd253b468a128cef758fc 100644
 --- a/pdf/out_of_process_instance.cc
 +++ b/pdf/out_of_process_instance.cc
-@@ -462,7 +462,9 @@ bool OutOfProcessInstance::Init(uint32_t argc,
+@@ -463,7 +463,9 @@ bool OutOfProcessInstance::Init(uint32_t argc,
    std::string document_url = document_url_var.AsString();
    base::StringPiece document_url_piece(document_url);
    is_print_preview_ = IsPrintPreviewUrl(document_url_piece);
