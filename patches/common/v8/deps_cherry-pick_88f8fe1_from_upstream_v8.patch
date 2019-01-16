@@ -35,10 +35,10 @@ Reviewed-By: Gus Caplan <me@gus.host>
 Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>
 
 diff --git a/test/cctest/test-api.cc b/test/cctest/test-api.cc
-index b49202d6127083e1d642f39ec149ce2261061ea7..dd56f7cd985db38820c94fd41b2f7f24a01e1811 100644
+index a788b1fe2c2c78cf6b7379ba3e328c9e244fffc7..81e6c0d459b3460512bfc1c36737331e19d05867 100644
 --- a/test/cctest/test-api.cc
 +++ b/test/cctest/test-api.cc
-@@ -29364,3 +29364,217 @@ TEST(PreviewMapIteratorEntriesWithDeleted) {
+@@ -28850,3 +28850,217 @@ TEST(PreviewMapIteratorEntriesWithDeleted) {
      }
    }
  }

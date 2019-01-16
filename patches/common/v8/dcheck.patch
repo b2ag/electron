@@ -5,10 +5,10 @@ Subject: dcheck.patch
 
 
 diff --git a/src/api.cc b/src/api.cc
-index b4a0f5bb5e484ea80dbfc234e207b44413f2d22f..f36e504161fed27392ef66ffc0ec87898958bf2d 100644
+index dd22b2a30b632fb9507eb2e2b95837dd9b8810db..bd547520d202db6e371d19c7132e2a923038a770 100644
 --- a/src/api.cc
 +++ b/src/api.cc
-@@ -8637,7 +8637,7 @@ void Isolate::SetPromiseRejectCallback(PromiseRejectCallback callback) {
+@@ -8531,7 +8531,7 @@ void Isolate::SetPromiseRejectCallback(PromiseRejectCallback callback) {
  
  
  void Isolate::RunMicrotasks() {
@@ -18,10 +18,10 @@ index b4a0f5bb5e484ea80dbfc234e207b44413f2d22f..f36e504161fed27392ef66ffc0ec8789
  }
  
 diff --git a/src/heap/heap.cc b/src/heap/heap.cc
-index 98a3ec8cbcf63f1446569d6458d1f4f4bdda2ca0..316b0e123af68ea0c7a50730ba04470a42918974 100644
+index b5588038680e5fa8d73a8add0521d496377cde80..4c73e42497bae991441d8aa9705cb30464895120 100644
 --- a/src/heap/heap.cc
 +++ b/src/heap/heap.cc
-@@ -4723,9 +4723,9 @@ void Heap::TearDown() {
+@@ -4711,9 +4711,9 @@ void Heap::TearDown() {
  void Heap::AddGCPrologueCallback(v8::Isolate::GCCallbackWithData callback,
                                   GCType gc_type, void* data) {
    DCHECK_NOT_NULL(callback);
