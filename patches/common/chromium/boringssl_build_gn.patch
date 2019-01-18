@@ -1,16 +1,15 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Jeremy Apthorp <nornagon@nornagon.net>
 Date: Thu, 20 Sep 2018 17:48:05 -0700
-Subject: boringssl_build_gn.patch
+Subject: boringssl BUILD.gn
 
-Build BoringSSL with some extra functions that nodejs needs. Only affects
-the GN build; with the GYP build, nodejs is still built with OpenSSL.
+Build BoringSSL with some extra functions that nodejs needs.
 
 diff --git a/third_party/boringssl/BUILD.gn b/third_party/boringssl/BUILD.gn
-index f57824f04d044b7180c0fc41df616a22174fe367..37735a7c2cad0a75aa609bac4e855cc564a7b2eb 100644
+index f57824f04d044b7180c0fc41df616a22174fe367..e947fe6f15a6a248db4d11ea3d3f74badf5e96a6 100644
 --- a/third_party/boringssl/BUILD.gn
 +++ b/third_party/boringssl/BUILD.gn
-@@ -46,6 +46,13 @@ config("no_asm_config") {
+@@ -46,6 +46,19 @@ config("no_asm_config") {
  
  all_sources = crypto_sources + ssl_sources
  all_headers = crypto_headers + ssl_headers
@@ -19,6 +18,12 @@ index f57824f04d044b7180c0fc41df616a22174fe367..37735a7c2cad0a75aa609bac4e855cc5
 +  all_sources += [
 +    "src/decrepit/evp/evp_do_all.c",
 +    "src/decrepit/xts/xts.c",
++  ]
++
++  all_sources += [
++    "src/decrepit/ripemd/internal.h",
++    "src/decrepit/ripemd/ripemd.c",
++    "src/decrepit/cfb/cfb.c",
 +  ]
 +}
  
