@@ -26,11 +26,14 @@ class Event : public Wrappable<Event>, public content::WebContentsObserver {
   void SetSenderAndMessage(content::RenderFrameHost* sender,
                            IPC::Message* message);
 
-  // event.PreventDefault().
+  // event.preventDefault().
   void PreventDefault(v8::Isolate* isolate);
 
-  // event.sendReply(array), used for replying synchronous message.
-  bool SendReply(const base::ListValue& result);
+  // get event.returnValue.
+  void GetReturnValue(v8::Isolate* isolate);
+
+  // set event.returnValue.
+  bool SetReturnValue(v8::Isolate* isolate, v8::Local<v8::Value> val);
 
  protected:
   explicit Event(v8::Isolate* isolate);
@@ -43,6 +46,9 @@ class Event : public Wrappable<Event>, public content::WebContentsObserver {
   void FrameDeleted(content::RenderFrameHost* rfh) override;
 
  private:
+  // used for replying synchronous message.
+  bool SendReply(const base::ListValue& result);
+
   // Replyer for the synchronous messages.
   content::RenderFrameHost* sender_ = nullptr;
   IPC::Message* message_ = nullptr;

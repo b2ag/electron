@@ -4,8 +4,11 @@
 
 #include "atom/browser/api/event.h"
 
+#include <memory>
+
 #include "atom/common/api/api_messages.h"
 #include "atom/common/native_mate_converters/string16_converter.h"
+#include "atom/common/native_mate_converters/v8_value_converter.h"
 #include "atom/common/native_mate_converters/value_converter.h"
 #include "content/public/browser/render_frame_host.h"
 #include "content/public/browser/web_contents.h"
@@ -53,6 +56,18 @@ void Event::PreventDefault(v8::Isolate* isolate) {
   GetWrapper()->Set(StringToV8(isolate, "defaultPrevented"), v8::True(isolate));
 }
 
+void Event::GetReturnValue(v8::Isolate* isolate) {}
+
+bool Event::SetReturnValue(v8::Isolate* isolate, v8::Local<v8::Value> val) {
+  atom::V8ValueConverter converter;
+  auto* value = converter.FromV8Value(val, isolate->GetCurrentContext());
+
+  base::ListValue result;
+  result.Append(std::unique_ptr<base::Value>(value));
+
+  return SendReply(result);
+}
+
 bool Event::SendReply(const base::ListValue& result) {
   if (message_ == nullptr || sender_ == nullptr)
     return false;
@@ -75,7 +90,8 @@ void Event::BuildPrototype(v8::Isolate* isolate,
   prototype->SetClassName(mate::StringToV8(isolate, "Event"));
   mate::ObjectTemplateBuilder(isolate, prototype->PrototypeTemplate())
       .SetMethod("preventDefault", &Event::PreventDefault)
-      .SetMethod("sendReply", &Event::SendReply);
+      .SetProperty("returnValue", &Event::GetReturnValue,
+                   &Event::SetReturnValue);
 }
 
 }  // namespace mate
